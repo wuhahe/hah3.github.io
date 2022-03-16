@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Wuhahe"><meta name="copyright" content="Wuhahe"><meta name="generator" content="Hexo 6.0.0"><meta name="theme" content="hexo-theme-yun"><title>MySql笔记 | Hah3</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.2.4/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/mini.global.js"></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/images/hah3.ico"><link rel="mask-icon" href="/images/hah3.ico" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"hah3.com","root":"/","title":"HAH3","version":"1.8.10","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":null},"vendors":{"darken":"https://cdn.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="启动MySQL： mysql -u(用户名) -p(明文密码)    （-p后可以不写密码直接回车就可以输入不是明文的密码） 数据库操作： 查看所有数据库 1show databases;  查看当前使用的数据库 1select database();  创建数据库 1create databases 数据库名 charset-utf8;  删除数据库 1drop database 数据库名;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql笔记">
+<meta property="og:url" content="http://hah3.com/2022/03/16/MySql%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hah3">
+<meta property="og:description" content="启动MySQL： mysql -u(用户名) -p(明文密码)    （-p后可以不写密码直接回车就可以输入不是明文的密码） 数据库操作： 查看所有数据库 1show databases;  查看当前使用的数据库 1select database();  创建数据库 1create databases 数据库名 charset-utf8;  删除数据库 1drop database 数据库名;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-16T10:16:32.000Z">
+<meta property="article:modified_time" content="2022-03-16T10:17:12.442Z">
+<meta property="article:author" content="Wuhahe">
+<meta name="twitter:card" content="summary"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Wuhahe"><img width="96" loading="lazy" src="/images/hah3.png" alt="Wuhahe"></a><div class="site-author-name"><a href="/about/">Wuhahe</a></div><span class="site-name">Hah3</span><sub class="site-subtitle"></sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">3</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">0</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://yun.yunyoujun.cn" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8MySQL%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">启动MySQL：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-number"></span> <span class="toc-text">数据库操作：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-number"></span> <span class="toc-text">表操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number"></span> <span class="toc-text">查询基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E6%93%8D%E4%BD%9C"><span class="toc-number"></span> <span class="toc-text">列操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number"></span> <span class="toc-text">条件语句查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">比较运算符：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">逻辑运算符：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">模糊查询：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.</span> <span class="toc-text">范围查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E5%88%A4%E6%96%AD"><span class="toc-number">5.</span> <span class="toc-text">空判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">6.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E9%A1%B5"><span class="toc-number">7.</span> <span class="toc-text">分页</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="toc-number">8.</span> <span class="toc-text">聚合函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%BB%84"><span class="toc-number">9.</span> <span class="toc-text">分组</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://hah3.com/2022/03/16/MySql%E7%AC%94%E8%AE%B0/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Wuhahe"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Hah3"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">MySql笔记</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="Created: 2022-03-16 18:16:32" itemprop="dateCreated datePublished" datetime="2022-03-16T18:16:32+08:00">2022-03-16</time></div><div class="post-classify"></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h4 id="启动MySQL："><a href="#启动MySQL：" class="headerlink" title="启动MySQL："></a>启动MySQL：</h4><p> mysql -u(用户名) -p(明文密码)    （-p后可以不写密码直接回车就可以输入不是明文的密码）</p>
+<h2 id="数据库操作："><a href="#数据库操作：" class="headerlink" title="数据库操作："></a>数据库操作：</h2><ul>
+<li><p>查看所有数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前使用的数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select database();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create databases 数据库名 charset-utf8;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database 数据库名;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use database 数据库名;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看数据库中所有表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><ul>
+<li><p>查看表结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc 表名;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建表结构的语法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(字段名 数据类型 可选的约束条件);</span><br><span class="line">例：</span><br><span class="line">create table TableName(id int unsigned auto_increment primary key not null,name varchar(10));</span><br></pre></td></tr></table></figure>
+
+<p>创建了两个列，分别是int类型 id，字符串类型name</p>
+<ul>
+<li>int类型 id</li>
+<li>unsigned 为“无符号”的意思。unsigned即为非负数，用此类型可以增加数据长度。</li>
+<li>auto_increment 自增长</li>
+<li>primary key 主键</li>
+<li>not null 非空</li>
+</ul>
+</li>
+<li><p>修改表–添加字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add 列名 类型;</span><br><span class="line">例：</span><br><span class="line">alter table TableName add NowTime datetime;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改表–修改字段–不重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 modify 列名 类型及约束;</span><br><span class="line">例：</span><br><span class="line">alter table TableName modify date nout noll;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除表–删除字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 drop 列名;</span><br><span class="line">例：</span><br><span class="line">alter table TableName drop NowTime;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">drop table 表名;</span><br><span class="line">例：</span><br><span class="line">drop table TableName;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看表的创建语句–详细过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show create table 表名;</span><br><span class="line">例：</span><br><span class="line">show create table TableName;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="查询基本使用"><a href="#查询基本使用" class="headerlink" title="查询基本使用"></a>查询基本使用</h2><ul>
+<li><p>查询所有列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from 表名;</span><br><span class="line">例:</span><br><span class="line">select * from TableName;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询指定列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 列1，列2， ...from 表名;</span><br><span class="line">例：</span><br><span class="line">select id, name from TableName;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="列操作"><a href="#列操作" class="headerlink" title="列操作"></a>列操作</h2><p>说明：主键列是自动增长，但是在全列插入时需要占位，通常使用空值(0或者null);字段默认 值default 来占位，插入成功后以实际数据为准  </p>
+<ul>
+<li><p><strong>全列插入</strong>：值的顺序与表结构字段的顺序完全一一对应，此时字段名列表不用填写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名 values(...);</span><br><span class="line">例：</span><br><span class="line">insert into TableName values(0,&#x27;name&#x27;,&#x27;2022-3-16&#x27;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>部分列插入</strong>：值的顺序与给出的列顺序对应，此时需要根据实际的数据的特点填写对应字段列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名 (列1, ...) values(值1, ...);</span><br><span class="line">例：</span><br><span class="line">insert into students(id,name,NowTime )values(1,&#x27;name2&#x27;,&#x27;2022-3-16&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>上面的语句一次可以向表中插入一行数据，还可以一次性插入多行数据，这样可以减少与数据库的通信。</p>
+</li>
+<li><p><strong>全列多行插入</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名 values(...),(...)...;</span><br><span class="line">例：</span><br><span class="line">insert into TableName values(0, &#x27;result1&#x27;),(0, &#x27;result2&#x27;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>部分列多行插入</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名(列1,...) values(值1,...),(值1,...)...;</span><br><span class="line">例：</span><br><span class="line">insert into TableName(name) values(&#x27;result1&#x27;),(&#x27;result2&#x27;),(&#x27;result3&#x27;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update 表名 set 列1=值1,列2=值2... where 条件;</span><br><span class="line">例：</span><br><span class="line">update TableName set name=&#x27;new name&#x27;,NowTime=&#x27;2022-3-17&#x27; where id=3;</span><br></pre></td></tr></table></figure>
+
+<p>修改id等于3的name和NowTime值</p>
+</li>
+<li><p><strong>删除</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delete from 表名 where 条件;</span><br><span class="line">例：</span><br><span class="line">delete from TableName where id=5;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>as关键字</strong>：</p>
+<ul>
+<li><p>使用as给字段起别名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id as 序号,name as 名字, NowTime as 当前时间 from TableName;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以通过as给表起别名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select t.id,t.name,t.NowTime from TableName as t;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="条件语句查询"><a href="#条件语句查询" class="headerlink" title="条件语句查询"></a>条件语句查询</h2><ul>
+<li>where 后面支持多种运算符，进行条件的处理  </li>
+<li>比较运算符  </li>
+<li>逻辑运算符  </li>
+<li>模糊查询  </li>
+<li>范围查询  </li>
+<li>空判断</li>
+</ul>
+<h4 id="比较运算符："><a href="#比较运算符：" class="headerlink" title="比较运算符："></a>比较运算符：</h4><ul>
+<li><p>等于：&#x3D; </p>
+</li>
+<li><p>大于：&gt;  </p>
+</li>
+<li><p>大于等于：&gt;&#x3D;  </p>
+</li>
+<li><p>小于：&lt;  </p>
+</li>
+<li><p>小于等于：&lt;  </p>
+</li>
+<li><p>不等于：!&#x3D;</p>
+</li>
+<li><p>或&lt;  </p>
+</li>
+<li><p>例1：查询编号大于3的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where id 3;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例2：查询编号不大于4的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where id &lt; 4;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例3：查询姓名不是“黄蓉”的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where name !=黄蓉&#x27;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例4：查询没被删除的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where is delete=0;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="逻辑运算符："><a href="#逻辑运算符：" class="headerlink" title="逻辑运算符："></a>逻辑运算符：</h4><ul>
+<li><p>and</p>
+</li>
+<li><p>or</p>
+</li>
+<li><p>not</p>
+</li>
+<li><p>例5：查询编号大于3的女同学  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where id 3 and gender=0;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例6：查询编号小于4或没被删除的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where id 4 or is delete=0; </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="模糊查询："><a href="#模糊查询：" class="headerlink" title="模糊查询："></a>模糊查询：</h4><ul>
+<li><p>like</p>
+</li>
+<li><p>%（表示任意多个任意字符）</p>
+</li>
+<li><p>_（表示一个任意字符）</p>
+</li>
+<li><p>例7：查询姓黄的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where name like &#x27;黄%&#x27;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例8：查询姓黄并且“名”是一个字的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where name like &#x27;黄_&#x27;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例9：查询姓黄或叫靖的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where name like &#x27;黄%&#x27; or name like &#x27;%靖&#x27;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="范围查询"><a href="#范围查询" class="headerlink" title="范围查询"></a>范围查询</h4><p>范围查询分为连续范围查询和非连续范围查询 ,in表示在一个非连续的范围内  </p>
+<ul>
+<li><p>例10：查询编号是1或3或8的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where id in(1,3,8);</span><br></pre></td></tr></table></figure>
+
+<p>betweer ..ad.表示在一个连续的范围内  </p>
+</li>
+<li><p>例11：查询编号为3至8的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where id between 3 and 8;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例12：查询编号是3至8的男生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where (id between 3 and 8) and gender=1;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="空判断"><a href="#空判断" class="headerlink" title="空判断"></a>空判断</h4><p>判断为空</p>
+<ul>
+<li><p>例13：查询没有填写身高的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where height is null;  </span><br></pre></td></tr></table></figure>
+
+<p>注意：1.null与是不同的2.is null   </p>
+<p>判非空is not null</p>
+</li>
+<li><p>例14：查询填写了身高的学生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where height is not null;  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例15：查询填写了身高的男生  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where height is not null and gender=1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优先级：</p>
+<p>优先级由高到低的顺序为：小括号，not，比较运算符，逻辑运算符and比or先运算，如果同时出现并希望先运算or，需要结合()使用</p>
+</li>
+</ul>
+<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><ul>
+<li><p>排序查询语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表名 order by 列1 asc|desc [,列2 asc|desc,...];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>语法说明：</p>
+<p>将行数据按照列1进行排序，如果某些行列1的值相同时，则按照列2排序，以此类推  </p>
+<p>asc从小到大排列，即升序  </p>
+<p>desc从大到小排序，即降序  </p>
+<p>默认按照列值从小到大排列（即asc关键字）</p>
+</li>
+<li><p>例1：查询未删除男生信息，按学号降序  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where gender= 1 and is delete= 0 order by id desc; </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例2：查询未删除学生信息，按名称升序  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where is delete= 0 order by name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例3：显示所有的学生信息，先按照年龄从大-&gt;小排序，当年龄相同时按照身高从高-&gt;矮排 序  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students order by age desc, height desc;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表名 limit start=0,count;</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>从start 开始，获取count 条数据  </p>
+<p>start 默认值为0  </p>
+<p>也就是当用户需要获取数据的前n条的时候可以直接写上 xxx limit n;</p>
+<ul>
+<li><p>例：查询前3行男生信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where gender=1 limit 0,3;</span><br></pre></td></tr></table></figure>
+
+<p>已知：每页显示m条数据，当前显示第n页</p>
+<p>求总页数：此段逻辑后面会在python项目中实现  </p>
+<p>查询总条数p1  </p>
+<p>使用p1除以m得到p2  </p>
+<p>如果整除则p2为总数页  </p>
+<p>如果不整除则p2+1为总页数  </p>
+<p>获取第n页的数据的SQL语句求解思路  </p>
+<p>第n页前有n-1页  </p>
+<p>所在第n页前已经显示的数据的总量是(n-1)*m </p>
+<p>*由于数据的下标从0开始所以第n页前所有的网页的下标是 0,1,…,(n-1)*m-1</p>
+<p>所以第n页的数据起始下标是(n-1)*m</p>
+<p>获取第n页数据的SQL语句</p>
+<p>select * from students where is_delete&#x3D;0 limit (n-1)*m,m   </p>
+<p>注意：在sql语句中limit 后不可以直接加公式</p>
+</li>
+</ul>
+<h4 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h4><p>总数</p>
+<p>count(*)表示计算总行数，括号中写星与列号，结果是相同的</p>
+<ul>
+<li><p>例1：查询学生总数  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*) from students; </span><br></pre></td></tr></table></figure>
+
+<p>最大值  </p>
+<p>max(列)表示求此列的最大值  </p>
+</li>
+<li><p>例2：查询女生的编号最大值  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select max(id) from students where gender=2;  </span><br></pre></td></tr></table></figure>
+
+<p>最小值  </p>
+<p>min(列)表示求此列的最小值  </p>
+</li>
+<li><p>例3：查询未删除的学生最小编号  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select min( id) from students where is_delete=0;</span><br></pre></td></tr></table></figure>
+
+<p>求和  </p>
+<p>sum(列)表示求此列的和</p>
+</li>
+<li><p>例4：查询男生的总年龄  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select sum(age) from students where gender=1;</span><br></pre></td></tr></table></figure>
+
+<p>平均年龄  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select sum(age)/count(*) from students where gender=1;</span><br></pre></td></tr></table></figure>
+
+<p>平均值  </p>
+<p>avg(列)表示求此列的平均值  </p>
+</li>
+<li><p>例5：查询未删除女生的编号平均值  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select avg(id) from students where is_delete= 0 and gender=2;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><p>group by   </p>
+<p>group by + group concat()  </p>
+<p>group_concat(字段名)根据分组结果，使用group _concat()来放置每一个分组中某字段的集合  </p>
+<p>group by +聚合函数  </p>
+<p>通过group_concat 的启发，我们既然可以统计出每个分组的某字段的值的集合，那么我们 也可以通过集合函数来对这个值的集合做一些操作  </p>
+<p>group by + having   </p>
+<p>having 条件表达式：用来过滤分组结果  </p>
+<p>having 作用和lwhere 类似，但having只能用于group by 而where,是用来过滤表数据 </p>
+<p>group by + with rollup   </p>
+<p>with rollupl 的作用是：在最后新增一行，来记录当前表中该字段对应的操作结果，一般是汇总结果  </p>
+<p>连接查询语法</p>
+<p>对于外连接outer 关键字可以省略  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表1 inner或left或right join 表2 on 表1.列 运算符 表2.列;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>例1：使用内连接查询班级表与学生表  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students inner join classes on students.cls_id = classes.id;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例2：使用左连接查询班级表与学生表  </p>
+<p>此处使用了as为表起别名，目的是编写简单  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students as s left join classes as c on s.cls_id = c.id;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例3：使用右连接查询班级表与学生表  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students as s right join classes as c on s.cls_id c.id;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例4：查询学生姓名及班级名称  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select s.name,c.name from students as s inner join classes as c on s.cls_id = c.id</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>子查询：</p>
+<p>在一个select 语句中，嵌入了另外一个select 语句，那么被嵌入的select语句称之为子查询语句，外部那个select语句则称为主查询  </p>
+<p>主查询和子查询的关系  </p>
+<p>子查询是嵌入到主查询中  </p>
+<p>子查询是辅助主查询的要么充当条件要么充当数据源  </p>
+<p>子查询是可以独立存在的语句是一条完整的select 语句  </p>
+<p>标量子查询  </p>
+<p>查询班级学生平均年龄  </p>
+<p>查询大于平均年龄的学生  </p>
+<p>查询班级学生的平均身高  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where age &gt; (select avg(age) from students);</span><br></pre></td></tr></table></figure>
+
+<p>列级子查询  </p>
+<p>查询还有学生在班的所有班级名字</p>
+<p>查询还有学生在班的所有班级名字  </p>
+<p>找出学生表中所有的班级id </p>
+<p>找出班级表中对应的名字  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name from classes where id in (select cls_id from students);</span><br></pre></td></tr></table></figure>
+
+<p>行级子查询  </p>
+<p>需求：查找班级年龄最大身高最高的学生  </p>
+<p>行元素：将多个字段合成一个行元素在行级子查询中会使用到行元素  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from students where (height,age) = (select max(height),max(age) from students);</span><br></pre></td></tr></table></figure>
+
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>Wuhahe</li><li class="post-copyright-link"><strong>Post link: </strong><a href="http://hah3.com/2022/03/16/MySql%E7%AC%94%E8%AE%B0/" title="MySql笔记">http://hah3.com/2022/03/16/MySql%E7%AC%94%E8%AE%B0/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> unless otherwise stated.</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2022/03/16/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/" rel="prev" title="渗透测试笔记"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">渗透测试笔记</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/03/03/%E5%88%A9%E7%94%A8hexo-Github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="利用hexo+Github搭建博客"><span class="post-nav-text">利用hexo+Github搭建博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> Wuhahe</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.0.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.8.10</span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
