@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://hah3.com/img/mysql%E7%AC%94%E8%AE%B0.png">
 <meta property="article:published_time" content="2022-03-16T10:16:32.000Z">
-<meta property="article:modified_time" content="2022-03-31T12:42:28.374Z">
+<meta property="article:modified_time" content="2022-05-19T11:06:49.709Z">
 <meta property="article:author" content="Wuhahe">
 <meta property="article:tag" content="mysql">
 <meta property="article:tag" content="数据库">
@@ -200,7 +200,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.6k 字
+      6.5k 字
     </span>
   
 
@@ -209,7 +209,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      47 分钟
+      55 分钟
     </span>
   
 
@@ -558,6 +558,62 @@
 <p>行元素：将多个字段合成一个行元素在行级子查询中会使用到行元素  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from students where (height,age) = (select max(height),max(age) from students);<br></code></pre></td></tr></table></figure>
 
+
+
+
+
+<h4 id="UNION操作符"><a href="#UNION操作符" class="headerlink" title="UNION操作符"></a>UNION操作符</h4><p><strong>用于合并两个或多个 SELECT 语句的结果集。</strong></p>
+<p>UNION 内部的每个 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每个 SELECT 语句中的列的顺序必须相同。</p>
+<p>以下为不同的两个表中的country列</p>
+<img src="/2022/03/16/MySql%E7%AC%94%E8%AE%B0/image-20220518182203683.png" srcset="/img/loading.gif" lazyload alt="image-20220518182203683" style="zoom:67%;">
+
+<img src="/2022/03/16/MySql%E7%AC%94%E8%AE%B0/image-20220518182226084.png" srcset="/img/loading.gif" lazyload alt="image-20220518182226084" style="zoom:67%;">
+
+<p>执行语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT country FROM Websites<br>UNION<br>SELECT country FROM apps<br>ORDER BY country;<br></code></pre></td></tr></table></figure>
+
+<img src="/2022/03/16/MySql%E7%AC%94%E8%AE%B0/image-20220518182336814.png" srcset="/img/loading.gif" lazyload alt="image-20220518182336814" style="zoom:67%;">
+
+<p>UNION指挥选取把不同的值，若想选取重复的值可使用UNION ALL</p>
+<p>执行语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT country FROM Websites<br>UNION ALL<br>SELECT country FROM apps<br>ORDER BY country;<br></code></pre></td></tr></table></figure>
+
+<img src="/2022/03/16/MySql%E7%AC%94%E8%AE%B0/image-20220518182531589.png" srcset="/img/loading.gif" lazyload alt="image-20220518182531589" style="zoom:67%;">
+
+
+
+<h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><p>用于限制查询结果返回的数量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from tablename limit i,nl<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>i：查询结果的索引值，即从0开始查找</li>
+<li>n：查询结果返回的数量</li>
+</ul>
+<h4 id="information-schema-schemata"><a href="#information-schema-schemata" class="headerlink" title="information_schema.schemata"></a>information_schema.schemata</h4><p>获取所有数据库信息</p>
+<img src="/2022/03/16/MySql%E7%AC%94%E8%AE%B0/image-20220519172542302.png" srcset="/img/loading.gif" lazyload alt="image-20220519172542302" style="zoom:67%;">
+
+
+
+<h4 id="group-concat"><a href="#group-concat" class="headerlink" title="group_concat()"></a>group_concat()</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select group_concat(column) from tablename;<br></code></pre></td></tr></table></figure>
+
+<p>将相同字段在同一行显示</p>
+<img src="/2022/03/16/MySql%E7%AC%94%E8%AE%B0/image-20220519173003658.png" srcset="/img/loading.gif" lazyload alt="image-20220519173003658" style="zoom:67%;">
+
+
+
+<h4 id="select-查询某数据库表名"><a href="#select-查询某数据库表名" class="headerlink" title="select 查询某数据库表名"></a>select 查询某数据库表名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select table_name from information_schema.tables where table_schema=&#x27;test&#x27;;<br></code></pre></td></tr></table></figure>
+
+<p>以上查询返回<strong>test数据库</strong>中的所有表</p>
+<h4 id="select-查询表中的字段名"><a href="#select-查询表中的字段名" class="headerlink" title="select 查询表中的字段名"></a>select 查询表中的字段名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select column_name from information_schema.columns where table_name=&#x27;test&#x27;;<br></code></pre></td></tr></table></figure>
+
+<p>以上返回<strong>test表</strong>中的所有字段名</p>
+<h4 id="不使用use进入数据库，获取该数据库数据"><a href="#不使用use进入数据库，获取该数据库数据" class="headerlink" title="不使用use进入数据库，获取该数据库数据"></a>不使用use进入数据库，获取该数据库数据</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from database.table;<br></code></pre></td></tr></table></figure>
+
+<p>database.table：数据库名.表名</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li><p>有时候添加数据会显示语法错误，可能是因为添加的数据与其语法重名，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">alter table gotodata add repeat varchar(100);		//显示语法错误，因为repeat与语法重名<br>alter table gotodata add `repeat` varchar(100);		//正确输入，使用反引号<br></code></pre></td></tr></table></figure></li>
+</ul>
 
             </div>
             <hr>
