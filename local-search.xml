@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>陌生名词</title>
+    <link href="/2022/08/01/%E9%99%8C%E7%94%9F%E5%90%8D%E8%AF%8D/"/>
+    <url>/2022/08/01/%E9%99%8C%E7%94%9F%E5%90%8D%E8%AF%8D/</url>
+    
+    <content type="html"><![CDATA[<h1 id="陌生名词"><a href="#陌生名词" class="headerlink" title="陌生名词"></a>陌生名词</h1><h3 id="异构"><a href="#异构" class="headerlink" title="异构"></a>异构</h3><p>即由不同的元素或部分组成，不均匀的意思。</p><h3 id="报文"><a href="#报文" class="headerlink" title="报文"></a>报文</h3><p><em>报文</em>(message)是网络中交换与传输的数据单元，即站点一次性要发送的数据块。<em>报文</em>包含了将要发送的完整的数据信息，其长短很不一致，长度不限且可变。</p><h3 id="TTL-Time-To-Live"><a href="#TTL-Time-To-Live" class="headerlink" title="TTL(Time To Live)"></a>TTL(Time To Live)</h3><p>该字段指定IP包被路由器丢弃之前允许通过的最大网段数量。<em>TTL</em>是IPv4报头的一个8 bit字段。注意：<em>TTL</em>与DNS <em>TTL</em>有区别。二者都是生存时间，前者指ICMP包的转发次数（跳数），后者指域名解析信息在DNS中的存在时间。</p><h3 id="跳数"><a href="#跳数" class="headerlink" title="跳数"></a>跳数</h3><p>跳数实际上是一个数值（振幅），简单的说就是指一个数（空间）可以被等分成多少个另一个数（相互隔离的或抽象的或连续的空间）的值。因为跳是需要能量的给人以充满力量的摆脱束缚跨越障碍的感觉（当然干任何事情都是需要转化能量的，除非你变成空间，那么能量就不再运动，能量就变成最原始的状态），把一个数等分仍然是需要转化能量的，跳得高矮，远近受转化能量的大小控制，等份的多少也受转化能量多少的支配，能量是最具有惰性的一种物质，他有想静止不动的特性（这是由于空间这种物质都是挤压在一起的，无法动弹），也就是说无限趋向于静止，所以有把一切拉回到静止状态的趋势，为了跨越并摆脱这种障碍所需要转化的能量的大小可以与任意维数上的空间中的位置建立一一对应的关系。也就是说为了克服无限大无限小的空间的阻碍需要暂时用能量把他挤开，以获得通过或占据他们的位置。这就是为什么数列、矩阵和维度空间都无限趋向或远离某一点的原因，也就是从什么地方开始在什么地方结束的问题。但是空间的分布按照需要并不是连续的，所以需要计算“跳”到另一个空间位置上去所需要的能量的一种计量单位。</p><h3 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h3><p>ICMP（Internet Control Message Protocol）<strong>Internet控制报文协议</strong>。它是TCP&#x2F;IP协议簇的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。ICMP使用IP的基本支持，就像它是一个更高级别的协议，但是，ICMP实际上是IP的一个组成部分，必须由每个IP模块实现。</p><h3 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h3><p>直译为<strong>媒体存取控制位址</strong>，也称为<strong>局域网地址</strong>（LAN Address），<strong>MAC位址</strong>，<strong>以太网地址</strong>（Ethernet Address）或<strong>物理地址</strong>（Physical Address），它是一个用来确认网络设备位置的位址。在OSI模型中，<strong>第三层网络层负责IP地址</strong>，<strong>第二层数据链路层则负责MAC位址</strong> 。MAC地址用于在网络中唯一标示一个网卡，一台设备若有一或多个网卡，则每个网卡都需要并会有一个唯一的MAC地址</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>网络基础</tag>
+      
+      <tag>专业名词</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>计算机网络基础</title>
     <link href="/2022/07/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"/>
     <url>/2022/07/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</url>
