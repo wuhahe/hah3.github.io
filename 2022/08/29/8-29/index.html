@@ -16,21 +16,29 @@
   <meta name="author" content="Wuhahe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Docker一、解决的问题由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。 Docker 主要解决环境配置问题，它是一种虚拟化技术，对进程进行隔离，被隔离的进程独立于宿主操作系统和其它隔离的进程。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。 二、与虚拟机的比较虚拟">
+    <meta name="description" content="8.29建立分区遵循的顺序建立主分区（至少一个）–&gt; 建立扩展分区（至多一个）–&gt; 建立逻辑分区（若干个）–&gt; 激活主分区 –&gt; 格式化所有分区 硬盘容量 &#x3D; 主分区容量 + 扩展分区容量 扩展分区容量 &#x3D; 若干个逻辑分区的容量总数 主分区 + 若干个逻辑分区 &#x3D; 驱动器&#x2F;卷（逻辑磁盘） 分区表现形式hd表示IDE设备 sd表示SCS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker">
-<meta property="og:url" content="http://hah3.com/2022/08/09/Docker/index.html">
+<meta property="og:title" content="8.29">
+<meta property="og:url" content="http://hah3.com/2022/08/29/8-29/index.html">
 <meta property="og:site_name" content="Hah3">
-<meta property="og:description" content="Docker一、解决的问题由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。 Docker 主要解决环境配置问题，它是一种虚拟化技术，对进程进行隔离，被隔离的进程独立于宿主操作系统和其它隔离的进程。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。 二、与虚拟机的比较虚拟">
+<meta property="og:description" content="8.29建立分区遵循的顺序建立主分区（至少一个）–&gt; 建立扩展分区（至多一个）–&gt; 建立逻辑分区（若干个）–&gt; 激活主分区 –&gt; 格式化所有分区 硬盘容量 &#x3D; 主分区容量 + 扩展分区容量 扩展分区容量 &#x3D; 若干个逻辑分区的容量总数 主分区 + 若干个逻辑分区 &#x3D; 驱动器&#x2F;卷（逻辑磁盘） 分区表现形式hd表示IDE设备 sd表示SCS">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-09T02:05:49.000Z">
-<meta property="article:modified_time" content="2022-08-09T02:21:17.415Z">
+<meta property="og:image" content="http://hah3.com/2022/08/29/8-29/image-20220829100106710.png">
+<meta property="og:image" content="http://hah3.com/2022/08/29/8-29/image-20220829101651357.png">
+<meta property="og:image" content="http://hah3.com/2022/08/29/8-29/image-20220829110254284.png">
+<meta property="og:image" content="http://hah3.com/2022/08/29/8-29/image-20220829110330050.png">
+<meta property="og:image" content="http://hah3.com/2022/08/29/8-29/image-20220829115543065.png">
+<meta property="og:image" content="http://hah3.com/2022/08/29/8-29/image-20220829115742181.png">
+<meta property="article:published_time" content="2022-08-29T04:18:17.000Z">
+<meta property="article:modified_time" content="2022-08-29T04:20:35.041Z">
 <meta property="article:author" content="Wuhahe">
-<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="珂兰寺">
+<meta property="article:tag" content="linux基本安装使用">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://hah3.com/2022/08/29/8-29/image-20220829100106710.png">
   
   
-  <title>Docker - Hah3</title>
+  <title>8.29 - Hah3</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -176,7 +184,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Docker">
+            <span class="h2" id="subtitle" title="8.29">
               
             </span>
 
@@ -186,8 +194,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-08-09 10:05" pubdate>
-        2022年8月9日 上午
+      <time datetime="2022-08-29 12:18" pubdate>
+        2022年8月29日 中午
       </time>
     </span>
   
@@ -197,7 +205,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.6k 字
     </span>
   
 
@@ -206,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      14 分钟
     </span>
   
 
@@ -235,45 +243,134 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Docker</h1>
+            <h1 style="display: none">8.29</h1>
             
             <div class="markdown-body">
-              <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="一、解决的问题"><a href="#一、解决的问题" class="headerlink" title="一、解决的问题"></a>一、解决的问题</h2><p>由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。</p>
-<p>Docker 主要解决环境配置问题，它是一种虚拟化技术，<strong>对进程进行隔离</strong>，<strong>被隔离的进程独立于宿主操作系统和其它隔离的进程</strong>。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。</p>
-<h2 id="二、与虚拟机的比较"><a href="#二、与虚拟机的比较" class="headerlink" title="二、与虚拟机的比较"></a>二、与虚拟机的比较</h2><p>虚拟机也是一种虚拟化技术，它与 Docker 最大的区别在于它是通过模拟硬件，并在硬件上安装操作系统来实现。</p>
-<h3 id="启动速度"><a href="#启动速度" class="headerlink" title="启动速度"></a>启动速度</h3><p>启动虚拟机需要先启动虚拟机的<strong>操作系统</strong>，再启动应用，这个过程非常慢；</p>
-<p>而启动 Docker 相当于启动宿主操作系统上的一个<strong>进程</strong>。</p>
-<h3 id="占用资源"><a href="#占用资源" class="headerlink" title="占用资源"></a>占用资源</h3><p>虚拟机是一个完整的操作系统，需要占用大量的磁盘、内存和 CPU 资源，一台机器只能开启几十个的虚拟机。</p>
-<p>而 Docker 只是一个进程，只需要将应用以及相关的组件打包，在运行时占用很少的资源，一台机器可以开启成千上万个 Docker。</p>
-<h2 id="三、优势"><a href="#三、优势" class="headerlink" title="三、优势"></a>三、优势</h2><p>除了启动速度快以及占用资源少之外，Docker 具有以下优势：</p>
-<h3 id="更容易迁移"><a href="#更容易迁移" class="headerlink" title="更容易迁移"></a>更容易迁移</h3><p>提供一致性的运行环境。已经打包好的应用可以在不同的机器上进行迁移，而不用担心环境变化导致无法运行。</p>
-<h3 id="更容易维护"><a href="#更容易维护" class="headerlink" title="更容易维护"></a>更容易维护</h3><p>使用分层技术和镜像，使得应用可以更容易复用重复的部分。复用程度越高，维护工作也越容易。</p>
-<h3 id="更容易扩展"><a href="#更容易扩展" class="headerlink" title="更容易扩展"></a>更容易扩展</h3><p>可以使用基础镜像进一步扩展得到新的镜像，并且官方和开源社区提供了大量的镜像，通过扩展这些镜像可以非常容易得到我们想要的镜像。</p>
-<h2 id="四、使用场景"><a href="#四、使用场景" class="headerlink" title="四、使用场景"></a>四、使用场景</h2><h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><p>持续集成指的是频繁地将代码集成到主干上，这样能够更快地发现错误。</p>
-<p>Docker 具有轻量级以及隔离性的特点，在将代码集成到一个 Docker 中不会对其它 Docker 产生影响。</p>
-<h3 id="提供可伸缩的云服务"><a href="#提供可伸缩的云服务" class="headerlink" title="提供可伸缩的云服务"></a>提供可伸缩的云服务</h3><p>根据应用的负载情况，可以很容易地增加或者减少 Docker。</p>
-<h3 id="搭建微服务架构"><a href="#搭建微服务架构" class="headerlink" title="搭建微服务架构"></a>搭建微服务架构</h3><p>Docker 轻量级的特点使得它很适合用于<strong>部署、维护、组合微服务</strong>。</p>
-<h2 id="五、镜像与容器"><a href="#五、镜像与容器" class="headerlink" title="五、镜像与容器"></a>五、镜像与容器</h2><p>镜像是一种静态的结构，可以看成面向对象里面的类，而容器是镜像的一个实例。</p>
-<p>镜像包含着容器运行时所需要的代码以及其它组件，它是一种分层结构，每一层都是只读的（read-only layers）。构建镜像时，会一层一层构建，前一层是后一层的基础。镜像的这种分层存储结构很适合镜像的复用以及定制。</p>
-<p>构建容器时，通过在镜像的基础上添加一个<strong>可写层</strong>（writable layer），用来保存着容器运行过程中的修改。</p>
+              <h1 id="8-29"><a href="#8-29" class="headerlink" title="8.29"></a>8.29</h1><h3 id="建立分区遵循的顺序"><a href="#建立分区遵循的顺序" class="headerlink" title="建立分区遵循的顺序"></a>建立分区遵循的顺序</h3><p>建立主分区（至少一个）–&gt; 建立扩展分区（至多一个）–&gt; 建立逻辑分区（若干个）–&gt; 激活主分区 –&gt; 格式化所有分区</p>
+<p>硬盘容量 &#x3D; 主分区容量 + 扩展分区容量</p>
+<p>扩展分区容量 &#x3D; 若干个逻辑分区的容量总数</p>
+<p>主分区 + 若干个逻辑分区 &#x3D; 驱动器&#x2F;卷（逻辑磁盘）</p>
+<h3 id="分区表现形式"><a href="#分区表现形式" class="headerlink" title="分区表现形式"></a>分区表现形式</h3><p>hd表示IDE设备</p>
+<p>sd表示SCSI设备</p>
+<p>紧跟硬盘顺序号（字母表示）</p>
+<p>紧跟分区顺序号（数字表示）</p>
+<p>hda4（第一块IDE硬盘的第四个分区）</p>
+<p>sdb6（第二块SCSI硬盘的第2个逻辑分区，主分区只有4个，往后即逻辑分区）</p>
+<p>CentOS8默认使用的文件系统类型：<strong>XSF</strong>–日志文件系统（CentOS7+，往前版本使用ext4），可满足使用最大16tb的文件，效率高</p>
+<p>重点目录</p>
+<ul>
+<li>bin：文件系统启动时启动</li>
+<li>boot：启动时加载核心文件</li>
+<li>dev：存放设备的目录，提供接口</li>
+<li><strong>etc：</strong>存放关于系统、管理的用户文件</li>
+<li>home：用户目录</li>
+<li>lib：存放共享链接库，动态链接库**</li>
+<li>proc：存放系统进程 、核心程序的信息</li>
+<li>root：root用户的主目录</li>
+<li>sbin：存放系统启动的一些命令（root常用）</li>
+<li>tmp：用户存放的临时文件</li>
+<li>usr：大多数安装的服务在此目录下</li>
+<li><strong>var：</strong>存放系统日志、web日志、数据库日志、web源代码、邮箱等</li>
+</ul>
+<p>绝对路径：从根目录展开</p>
+<p>相对路径：从当前目录展开</p>
+<p><strong>挂载</strong></p>
+<ul>
+<li>&#x2F;</li>
+<li>boot</li>
+<li>swap：交换分区（虚拟内存）</li>
+<li>XFS：日志文件系统</li>
+</ul>
+<h3 id="inode节点与块"><a href="#inode节点与块" class="headerlink" title="inode节点与块"></a>inode节点与块</h3><p>硬盘存储最小单位：扇区sector（512字节&#x3D;0.5kb）</p>
+<p>常见8个扇区为一个块（block）：4kb</p>
+<p>一个文件分为两个区域：</p>
+<p>1、元数据（创建者、创建日期、大小、操作权限、存放文件数据块的位置、链接数等，称为索引节点）</p>
+<ul>
+<li><p>inode区域：存储元数据的区域</p>
+</li>
+<li><p>inode bitmap：inode的使用情况，比如空闲inode</p>
+</li>
+<li><p>block bitmap：块的使用情况，比如空闲inode与空闲块等信息</p>
+</li>
+</ul>
+<p>2、数据块（文件内容、目录信息）</p>
+<img src="/2022/08/29/8-29/image-20220829100106710.png" srcset="/img/loading.gif" lazyload alt="image-20220829100106710" style="zoom: 50%;">
+
+
+
+
+
+<img src="/2022/08/29/8-29/image-20220829101651357.png" srcset="/img/loading.gif" lazyload alt="image-20220829101651357" style="zoom: 50%;">
+
+
+
+<h3 id="简化linux系统服务"><a href="#简化linux系统服务" class="headerlink" title="简化linux系统服务"></a>简化linux系统服务</h3><p><code>systemctl stop firewall</code>：关闭防火墙</p>
+<p><code>iptables -F</code>：清除防火墙规则</p>
+<p><code>setenforce 0</code>：关闭selinux防火墙</p>
+<h3 id="Linux系统引导过程"><a href="#Linux系统引导过程" class="headerlink" title="Linux系统引导过程"></a>Linux系统引导过程</h3><ul>
+<li>开机自检BIOS：开机检测设备，将设别启动顺序交给系统</li>
+<li>MBR引导：（硬盘中的第一个扇区）主引导记录，引导设备启动等</li>
+<li>GRUB菜单：统一启动加载器，根据用户选择加载不同内核等</li>
+<li>加载内核（kernel）：根据GRUB菜单加载响应内核。</li>
+<li>init进程初始化：由linux内核加载运行，在sbin文件夹下的可执行文件。</li>
+</ul>
+<p>可执行程序</p>
+<ul>
+<li>.exe：windows</li>
+<li>.elf：linux</li>
+</ul>
+<h3 id="init与systemd"><a href="#init与systemd" class="headerlink" title="init与systemd"></a>init与systemd</h3><p>init进程是系统中第一个进程，PID号永远是1</p>
+<h5 id="systemd进程"><a href="#systemd进程" class="headerlink" title="systemd进程"></a>systemd进程</h5><p>代替init进程，成为主流</p>
+<p>具有向下兼容，更快的启动速度，集中化命令管理，更合理的命令结构等优势</p>
+<img src="/2022/08/29/8-29/image-20220829110254284.png" srcset="/img/loading.gif" lazyload alt="image-20220829110254284" style="zoom: 50%;">
+
+<p>可通过  <code>init 1-6</code> 切换运行级别</p>
+<img src="/2022/08/29/8-29/image-20220829110330050.png" srcset="/img/loading.gif" lazyload alt="image-20220829110330050" style="zoom: 50%;">
+
+
+
+<h3 id="小节提问"><a href="#小节提问" class="headerlink" title="小节提问"></a>小节提问</h3><p>1、第2块SCSI硬盘的第3个逻辑分区：</p>
+<p><strong>sdb7</strong>（因为主分区只能有4个，所以逻辑分区从第5个开始表示）</p>
+<p>2、CentOS8默认使用的文件系统类型：XSF</p>
+<p>3、inode节点用光了会怎样：无法再储存文件</p>
+<p>4、systemd进程的PID是多少：1</p>
+<h5 id="systemctl系统服务控制"><a href="#systemctl系统服务控制" class="headerlink" title="systemctl系统服务控制"></a>systemctl系统服务控制</h5><ul>
+<li>start：启动</li>
+<li>stop：停止</li>
+<li>restart：重新启动</li>
+<li>reload：重新加载</li>
+<li>status：查看服务状态</li>
+<li>……</li>
+</ul>
+<p>常用</p>
+<ul>
+<li><code>systemctl stop firewalld</code>  #关闭防火墙</li>
+<li><code>systemctl reboot</code> #重启</li>
+<li><code>systemctl status 服务名称</code> #查看服务的系统状态 </li>
+<li><code>systemctl restart 服务名称</code> # 重启服务</li>
+<li><code>systemctl enabled 服务名称</code> #设置为开机自启动</li>
+<li><code>systemctl disabled 服务名称</code> # 设置为开机禁止启动</li>
+<li><code>systemctl list-dependencies 服务名称</code> #查看该服务的依赖项</li>
+</ul>
+<h4 id="系统运行级别"><a href="#系统运行级别" class="headerlink" title="系统运行级别"></a>系统运行级别</h4><img src="/2022/08/29/8-29/image-20220829115543065.png" srcset="/img/loading.gif" lazyload alt="image-20220829115543065" style="zoom: 50%;">
+
+
+
+<h4 id="系统服务管理工具"><a href="#系统服务管理工具" class="headerlink" title="系统服务管理工具"></a>系统服务管理工具</h4><p>ntsysv默认未下载，提供图形界面，但不推荐</p>
+<img src="/2022/08/29/8-29/image-20220829115742181.png" srcset="/img/loading.gif" lazyload alt="image-20220829115742181" style="zoom:50%;">
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Docker/">Docker</a>
-                    
-                  </div>
-                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Docker/">Docker</a>
+                      <a class="hover-with-bg" href="/tags/%E7%8F%82%E5%85%B0%E5%AF%BA/">珂兰寺</a>
+                    
+                      <a class="hover-with-bg" href="/tags/linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">linux基本安装使用</a>
                     
                   </div>
                 
@@ -290,18 +387,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/29/8-26/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">8.26</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/01/%E9%99%8C%E7%94%9F%E5%90%8D%E8%AF%8D/">
-                        <span class="hidden-mobile">陌生名词</span>
+                      <a href="/2022/08/29/8-26/">
+                        <span class="hidden-mobile">8.26</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
