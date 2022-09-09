@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuhahe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Day7笔记ShellShell的作用介于系统和与用户之间，负责解释命令行。   常用的只有sh、bash     编写第一个shell脚本  source：点命令，该命令通常用 “.” 来代替。常用于重新执行刚修改的初始化文件，是之立即生效,而不必注销重新登陆。   第一行备注 #!&#x2F;bin&#x2F;bash     重定向与管道操作  标准错误输出：ls notfount 2&gt; new.log">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day7">
+<meta property="og:url" content="http://hah3.com/2022/09/09/Day7/index.html">
+<meta property="og:site_name" content="Hah3">
+<meta property="og:description" content="Day7笔记ShellShell的作用介于系统和与用户之间，负责解释命令行。   常用的只有sh、bash     编写第一个shell脚本  source：点命令，该命令通常用 “.” 来代替。常用于重新执行刚修改的初始化文件，是之立即生效,而不必注销重新登陆。   第一行备注 #!&#x2F;bin&#x2F;bash     重定向与管道操作  标准错误输出：ls notfount 2&gt; new.log">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906093121705.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906093308798.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906095140497.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906095813448.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906095905839.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906100803187.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906100736369.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906101850766.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906104656310.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906104726127.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906105334640.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906111927009.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906133626895.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906133826812.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906133944700.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906134146483.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906134904673.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906135335125.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906135546357.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906135823047.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906135926436.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906140034377.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906140125104.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906140705031.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906140815443.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906141340175.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906141542552.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906141734151.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906144705958.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906145241175.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906145309476.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906145418066.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906150012040.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906150421005.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906150507687.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906150609199.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906152400172.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906153037916.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906153528478.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906153558181.png">
+<meta property="og:image" content="http://hah3.com/2022/09/09/Day7/image-20220906153856021.png">
+<meta property="article:published_time" content="2022-09-09T15:59:45.000Z">
+<meta property="article:modified_time" content="2022-09-09T16:00:39.416Z">
+<meta property="article:author" content="Wuhahe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://hah3.com/2022/09/09/Day7/image-20220906093121705.png">
+  
+  
+  <title>Day7 - Hah3</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"hah3.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hah3</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Day7">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-09 23:59" pubdate>
+        2022年9月9日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      477 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Day7</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Day7笔记"><a href="#Day7笔记" class="headerlink" title="Day7笔记"></a>Day7笔记</h1><h3 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h3><h4 id="Shell的作用"><a href="#Shell的作用" class="headerlink" title="Shell的作用"></a>Shell的作用</h4><p>介于系统和与用户之间，负责解释命令行。</p>
+<img src="/2022/09/09/Day7/image-20220906093121705.png" srcset="/img/loading.gif" lazyload alt="image-20220906093121705" style="zoom:50%;">
+
+<p>常用的只有sh、bash</p>
+<img src="/2022/09/09/Day7/image-20220906093308798.png" srcset="/img/loading.gif" lazyload alt="image-20220906093308798" style="zoom:50%;">
+
+
+
+<h4 id="编写第一个shell脚本"><a href="#编写第一个shell脚本" class="headerlink" title="编写第一个shell脚本"></a>编写第一个shell脚本</h4><img src="/2022/09/09/Day7/image-20220906095140497.png" srcset="/img/loading.gif" lazyload alt="image-20220906095140497" style="zoom:50%;">
+
+<p><strong>source</strong>：点命令，该命令通常用 “.” 来代替。常用于重新执行刚修改的初始化文件，是之立即生效,而不必注销重新登陆。</p>
+<img src="/2022/09/09/Day7/image-20220906095813448.png" srcset="/img/loading.gif" lazyload alt="image-20220906095813448" style="zoom:50%;">
+
+<p>第一行备注 <code>#!/bin/bash</code></p>
+<img src="/2022/09/09/Day7/image-20220906095905839.png" srcset="/img/loading.gif" lazyload alt="image-20220906095905839" style="zoom:50%;">
+
+
+
+<h4 id="重定向与管道操作"><a href="#重定向与管道操作" class="headerlink" title="重定向与管道操作"></a>重定向与管道操作</h4><img src="/2022/09/09/Day7/image-20220906100803187.png" srcset="/img/loading.gif" lazyload alt="image-20220906100803187" style="zoom:50%;">
+
+<p>标准错误输出：<code>ls notfount 2&gt; new.log</code></p>
+<p>notfount为不存在的文件夹，可通过这样的方式输出报错信息</p>
+<img src="/2022/09/09/Day7/image-20220906100736369.png" srcset="/img/loading.gif" lazyload alt="image-20220906100736369" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906101850766.png" srcset="/img/loading.gif" lazyload alt="image-20220906101850766" style="zoom:50%;">
+
+
+
+<h4 id="Shell变量的作用、类型"><a href="#Shell变量的作用、类型" class="headerlink" title="Shell变量的作用、类型"></a>Shell变量的作用、类型</h4><img src="/2022/09/09/Day7/image-20220906104656310.png" srcset="/img/loading.gif" lazyload alt="image-20220906104656310" style="zoom:50%;">
+
+<h4 id="自定义变量"><a href="#自定义变量" class="headerlink" title="自定义变量"></a>自定义变量</h4><img src="/2022/09/09/Day7/image-20220906104726127.png" srcset="/img/loading.gif" lazyload alt="image-20220906104726127" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906105334640.png" srcset="/img/loading.gif" lazyload alt="image-20220906105334640" style="zoom:50%;">
+
+<p><strong>export命令</strong></p>
+<p>该命令的效力仅限于该次登陆操作</p>
+<img src="/2022/09/09/Day7/image-20220906111927009.png" srcset="/img/loading.gif" lazyload alt="image-20220906111927009" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906133626895.png" srcset="/img/loading.gif" lazyload alt="image-20220906133626895" style="zoom:50%;">
+
+
+
+<h4 id="特殊的shell变量"><a href="#特殊的shell变量" class="headerlink" title="特殊的shell变量"></a>特殊的shell变量</h4><img src="/2022/09/09/Day7/image-20220906133826812.png" srcset="/img/loading.gif" lazyload alt="image-20220906133826812" style="zoom:50%;">
+
+
+
+<img src="/2022/09/09/Day7/image-20220906133944700.png" srcset="/img/loading.gif" lazyload alt="image-20220906133944700" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906134146483.png" srcset="/img/loading.gif" lazyload alt="image-20220906134146483" style="zoom:50%;">
+
+
+
+<h4 id="shell脚本与计划任务"><a href="#shell脚本与计划任务" class="headerlink" title="shell脚本与计划任务"></a>shell脚本与计划任务</h4><img src="/2022/09/09/Day7/image-20220906134904673.png" srcset="/img/loading.gif" lazyload alt="image-20220906134904673" style="zoom:50%;">
+
+
+
+<h3 id="Shell脚本应用"><a href="#Shell脚本应用" class="headerlink" title="Shell脚本应用"></a>Shell脚本应用</h3><h4 id="test命令？？"><a href="#test命令？？" class="headerlink" title="test命令？？"></a>test命令？？</h4><img src="/2022/09/09/Day7/image-20220906135335125.png" srcset="/img/loading.gif" lazyload alt="image-20220906135335125" style="zoom:50%;">
+
+<p>当遇到权限不够，无法查看用户权限查看等命令时，可以用test和以下选项尝试查看</p>
+<img src="/2022/09/09/Day7/image-20220906135546357.png" srcset="/img/loading.gif" lazyload alt="image-20220906135546357" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906135823047.png" srcset="/img/loading.gif" lazyload alt="image-20220906135823047" style="zoom:50%;">
+
+<h5 id="字符比较"><a href="#字符比较" class="headerlink" title="字符比较"></a>字符比较</h5><img src="/2022/09/09/Day7/image-20220906135926436.png" srcset="/img/loading.gif" lazyload alt="image-20220906135926436" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906140034377.png" srcset="/img/loading.gif" lazyload alt="image-20220906140034377" style="zoom:50%;">
+
+
+
+<h4 id="if语句结构"><a href="#if语句结构" class="headerlink" title="if语句结构"></a>if语句结构</h4><h5 id="单分支结构"><a href="#单分支结构" class="headerlink" title="单分支结构"></a>单分支结构</h5><img src="/2022/09/09/Day7/image-20220906140125104.png" srcset="/img/loading.gif" lazyload alt="image-20220906140125104" style="zoom:50%;">
+
+<h5 id="双分支结构"><a href="#双分支结构" class="headerlink" title="双分支结构"></a>双分支结构</h5><img src="/2022/09/09/Day7/image-20220906140705031.png" srcset="/img/loading.gif" lazyload alt="image-20220906140705031" style="zoom:50%;">
+
+<h5 id="多分枝结构"><a href="#多分枝结构" class="headerlink" title="多分枝结构"></a>多分枝结构</h5><img src="/2022/09/09/Day7/image-20220906140815443.png" srcset="/img/loading.gif" lazyload alt="image-20220906140815443" style="zoom:50%;">
+
+
+
+<h4 id="if语句应用实例"><a href="#if语句应用实例" class="headerlink" title="if语句应用实例"></a>if语句应用实例</h4><p>-d 选项为检测当前目录是否存在</p>
+<img src="/2022/09/09/Day7/image-20220906141340175.png" srcset="/img/loading.gif" lazyload alt="image-20220906141340175" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906141542552.png" srcset="/img/loading.gif" lazyload alt="image-20220906141542552" style="zoom:50%;">
+
+<p>下面图片示例发错了</p>
+<img src="/2022/09/09/Day7/image-20220906141734151.png" srcset="/img/loading.gif" lazyload alt="image-20220906141734151" style="zoom:50%;">
+
+
+
+<h4 id="for语句结构"><a href="#for语句结构" class="headerlink" title="for语句结构"></a>for语句结构</h4><img src="/2022/09/09/Day7/image-20220906144705958.png" srcset="/img/loading.gif" lazyload alt="image-20220906144705958" style="zoom:50%;">
+
+
+
+<h3 id="for语句应用实例"><a href="#for语句应用实例" class="headerlink" title="for语句应用实例"></a>for语句应用实例</h3><img src="/2022/09/09/Day7/image-20220906145241175.png" srcset="/img/loading.gif" lazyload alt="image-20220906145241175" style="zoom:50%;">
+
+
+
+<h3 id="while语句的结构"><a href="#while语句的结构" class="headerlink" title="while语句的结构"></a>while语句的结构</h3><img src="/2022/09/09/Day7/image-20220906145309476.png" srcset="/img/loading.gif" lazyload alt="image-20220906145309476" style="zoom:50%;">
+
+
+
+<h4 id="while语句应用实例"><a href="#while语句应用实例" class="headerlink" title="while语句应用实例"></a>while语句应用实例</h4><img src="/2022/09/09/Day7/image-20220906145418066.png" srcset="/img/loading.gif" lazyload alt="image-20220906145418066" style="zoom:50%;">
+
+
+
+<h3 id="case语句应用实例"><a href="#case语句应用实例" class="headerlink" title="case语句应用实例"></a>case语句应用实例</h3><img src="/2022/09/09/Day7/image-20220906150012040.png" srcset="/img/loading.gif" lazyload alt="image-20220906150012040" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906150421005.png" srcset="/img/loading.gif" lazyload alt="image-20220906150421005" style="zoom:50%;">
+
+
+
+<h3 id="正则表达式概述"><a href="#正则表达式概述" class="headerlink" title="正则表达式概述"></a>正则表达式概述</h3><img src="/2022/09/09/Day7/image-20220906150507687.png" srcset="/img/loading.gif" lazyload alt="image-20220906150507687" style="zoom:50%;">
+
+<p><strong>正则表达式</strong></p>
+<img src="/2022/09/09/Day7/image-20220906150609199.png" srcset="/img/loading.gif" lazyload alt="image-20220906150609199" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906152400172.png" srcset="/img/loading.gif" lazyload alt="image-20220906152400172" style="zoom:50%;">
+
+
+
+<h3 id="sed工具"><a href="#sed工具" class="headerlink" title="sed工具"></a>sed工具</h3><img src="/2022/09/09/Day7/image-20220906153037916.png" srcset="/img/loading.gif" lazyload alt="image-20220906153037916" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906153528478.png" srcset="/img/loading.gif" lazyload alt="image-20220906153528478" style="zoom:50%;">
+
+
+
+<h3 id="awk工具"><a href="#awk工具" class="headerlink" title="awk工具"></a>awk工具</h3><img src="/2022/09/09/Day7/image-20220906153558181.png" srcset="/img/loading.gif" lazyload alt="image-20220906153558181" style="zoom:50%;">
+
+<img src="/2022/09/09/Day7/image-20220906153856021.png" srcset="/img/loading.gif" lazyload alt="image-20220906153856021" style="zoom:50%;">
+
+
+
+
+
+
+
+<h5 id="以下命令的主要用途"><a href="#以下命令的主要用途" class="headerlink" title="以下命令的主要用途"></a>以下命令的主要用途</h5><p>grep：查找</p>
+<p>sed：编辑</p>
+<p>awk：分析</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/09/Day8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Day8</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/09/Day6/">
+                        <span class="hidden-mobile">Day6</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
