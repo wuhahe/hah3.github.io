@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuhahe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Day13笔记PHP进阶数组索引数组普通数组 关联数组键值形式，类似于其他语言的字典 删除关联字典：unset($bank[&#39;test&#39;]) 多维数组数组的嵌套 删除与关联数组一致 12345$arr &#x3D; array(	1,2,array(&quot;u&quot;,&quot;p&quot;),    &quot;user&quot; &#x3D;&gt; array(&quot;ha&amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day13">
+<meta property="og:url" content="http://hah3.com/2022/09/16/Day13/index.html">
+<meta property="og:site_name" content="Hah3">
+<meta property="og:description" content="Day13笔记PHP进阶数组索引数组普通数组 关联数组键值形式，类似于其他语言的字典 删除关联字典：unset($bank[&#39;test&#39;]) 多维数组数组的嵌套 删除与关联数组一致 12345$arr &#x3D; array(	1,2,array(&quot;u&quot;,&quot;p&quot;),    &quot;user&quot; &#x3D;&gt; array(&quot;ha&amp;q">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hah3.com/2022/09/16/Day13/image-20220915143841394.png">
+<meta property="article:published_time" content="2022-09-16T01:28:22.000Z">
+<meta property="article:modified_time" content="2022-09-17T01:55:16.212Z">
+<meta property="article:author" content="Wuhahe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://hah3.com/2022/09/16/Day13/image-20220915143841394.png">
+  
+  
+  <title>Day13 - Hah3</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"hah3.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hah3</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Day13">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-16 09:28" pubdate>
+        2022年9月16日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Day13</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Day13笔记"><a href="#Day13笔记" class="headerlink" title="Day13笔记"></a>Day13笔记</h1><h2 id="PHP进阶"><a href="#PHP进阶" class="headerlink" title="PHP进阶"></a>PHP进阶</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h5 id="索引数组"><a href="#索引数组" class="headerlink" title="索引数组"></a>索引数组</h5><p>普通数组</p>
+<h5 id="关联数组"><a href="#关联数组" class="headerlink" title="关联数组"></a>关联数组</h5><p>键值形式，类似于其他语言的字典</p>
+<p>删除关联字典：<code>unset($bank[&#39;test&#39;])</code></p>
+<h5 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h5><p>数组的嵌套</p>
+<p>删除与关联数组一致</p>
+<figure class="highlight php"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$arr</span> = <span class="hljs-keyword">array</span>(<br>	<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;u&quot;</span>,<span class="hljs-string">&quot;p&quot;</span>),<br>    <span class="hljs-string">&quot;user&quot;</span> =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;ha&quot;</span>, <span class="hljs-string">&quot;he&quot;</span>),<br>    <span class="hljs-string">&quot;passwd&quot;</span> =&gt; <span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;admin&quot;</span>, <span class="hljs-number">123</span>)<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="数组相关函数"><a href="#数组相关函数" class="headerlink" title="数组相关函数"></a>数组相关函数</h5><ul>
+<li><p>count：输出数组的元素个数</p>
+</li>
+<li><p>sort：升序排序 （字符串根据字母排序，数字按大小排序）</p>
+</li>
+<li><p>rsort：降序排序 （与上相同）</p>
+</li>
+<li><p>asort：升序排序 （根据值）</p>
+</li>
+<li><p>arsort：降序排序 （根据值）</p>
+</li>
+<li><p>ksort：升序排序 （根据键）</p>
+</li>
+<li><p>krsort：降序排序 （根据键）</p>
+</li>
+<li><p>array_keys：获取数组的key。</p>
+<p><code>array_kays($arr, &quot;admin&quot;)</code>  查询arr数组中值为”admin”的键，可添加参数 <code>true</code> ，效果为匹配的值是绝对相等的，类似于 <code>===</code>， <code>false</code> 则类似 <code>==</code> 只匹配值。</p>
+</li>
+<li><p>foreach：遍历数组，<code>foreach ($arr as $key =&gt; $value) &#123;...&#125;</code> 将数组的键值依次赋值给变量key和value进行接下来的操作</p>
+</li>
+<li><p>in_array：查询值，<code>in_array($value, $arr)</code> 查询value值是否存在arr数组中，存在返回1，不存在返回空</p>
+</li>
+<li><p>max：获取数组中的最大值</p>
+</li>
+<li><p>array_search：<code>array_search($value, $arr)</code> 在arr数组中查询value值的下标</p>
+</li>
+</ul>
+<h5 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h5><ul>
+<li>&#x3D;&gt;：分隔数组中键和值的作用</li>
+<li><strong>-&gt;<strong>：插入式解引用操作符，调用由引用传递参数的子程序的方法。*相当于”的”这个字含义，例如 <code>$this-&gt;sleep</code>就相当于时</strong>$this的sleep</strong>。*</li>
+</ul>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>万物皆对象，尝试把每个即将实现一类功能的程序写成类</p>
+<p>类的属性若在声明时被赋予初值，则这个值必须是常数。类的所有属性在声明时必须用一个关键字指明其”可见性“，这些关键字包括pulic、protected、private。</p>
+<h5 id="关键字："><a href="#关键字：" class="headerlink" title="关键字："></a>关键字：</h5><ul>
+<li>abstract：抽象类或方法，被修饰为抽象类之后，类将不能被实例化，但可以被继承。只要一个类里面有一个方法是抽象方法，那么这个类就被定义为抽象类。不允许new实例化，但可以利用<strong>extend</strong>扩展出一个子类。</li>
+<li>final：利用final修饰后的类不能被继承，，final修饰后的方法不能在子类中重新定义，即不能修改</li>
+</ul>
+<h5 id="属性："><a href="#属性：" class="headerlink" title="属性："></a>属性：</h5><ul>
+<li>public：表明这是一个<strong>公共成员</strong>，既可以通过外部对象访问也可以通过特殊变量 <code>$this</code> 从内部方法访问。如果别的类继承了该类，这个规则也同样适用。（<strong>在类的内部、子类中或者类的外部都可以使用，不受限制</strong>）</li>
+<li>protected：表明这是一个<strong>受保护的成员</strong>，不能从外部的对象访问，只能从内部的方法访问，如果别的类继承了该类，这个规则也同样适用。（<strong>在类的内部和子类中可以使用，但不能再类的外部使用</strong>）</li>
+<li>private：表明该成员是<strong>私有成员</strong>，不能从外部的对象访问，只能从内部的方法访问，如果别的类继承了该类，也无法在别的类中访问该成员，因为私有成员是不能被继承的。（只能在类的内部使用，<strong>在类的外部或子类中都无法使用</strong>）</li>
+</ul>
+<h5 id="其他问题-1"><a href="#其他问题-1" class="headerlink" title="其他问题"></a>其他问题</h5><p>在类中的 <code>this</code> 变量相当于自己的意思，类似于python的self</p>
+<h3 id="魔术方法？？？"><a href="#魔术方法？？？" class="headerlink" title="魔术方法？？？"></a>魔术方法？？？</h3><h3 id="连接mysql"><a href="#连接mysql" class="headerlink" title="连接mysql"></a>连接mysql</h3><p>流程</p>
+<img src="/2022/09/16/Day13/image-20220915143841394.png" srcset="/img/loading.gif" lazyload alt="image-20220915143841394" style="zoom:50%;">
+
+
+
+<ul>
+<li>host：数据库服务器ip</li>
+<li>username：数据库用户名</li>
+<li>password：密码</li>
+<li>daname：数据库名称</li>
+<li>port：数据库服务端口</li>
+<li>mysqli_connect()：连接指令，将上述定义的数据输入指令中以连接数据库</li>
+<li>query()：提交执行sql语句。</li>
+<li>mysqli_close()：关闭mysql连接，释放内存</li>
+</ul>
+<h4 id="mysqli-conncet与mysql-connect？？？"><a href="#mysqli-conncet与mysql-connect？？？" class="headerlink" title="mysqli_conncet与mysql_connect？？？"></a>mysqli_conncet与mysql_connect？？？</h4><h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>使用 <code>fopen()</code> 函数来打开文件或者URL。成功则返回文件指针资源，失败则返回FALSE</p>
+<h5 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h5><ul>
+<li>r：以只读方式打开，将文件指针指向文件头</li>
+<li>w：以写入方式打开，将文件指针指向文件头并将文件大小截为零。若文件不存在则创建该文件。</li>
+<li>a：以写入方式打开，将文件指针指向文件末尾。若文件不存在则创建该文件。</li>
+</ul>
+<h5 id="文件操作相关函数"><a href="#文件操作相关函数" class="headerlink" title="文件操作相关函数"></a>文件操作相关函数</h5><ul>
+<li>fgetc()：在对某一个字符进行查找、替换时，就需要有针对性的对某个字符进行读取，在php中可以使用fgetc()函数实现此功能。</li>
+</ul>
+<p><strong>读取：</strong></p>
+<ul>
+<li>fgets()：用于一次读取一行数据</li>
+<li>readfile()：用于读取一个文件并将其写入到输出缓冲</li>
+<li>file()：读取整个文件的内容</li>
+<li>file_get_contents()：可以将文件的内容读取到一个字符串中</li>
+</ul>
+<p><strong>写入：</strong></p>
+<ul>
+<li>fwrite：可以将一个字符串写入到文件中</li>
+<li>file_exists：判定当前文件是否存在</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/16/Day14/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Day14</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/16/Day12/">
+                        <span class="hidden-mobile">Day12</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
