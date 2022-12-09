@@ -24,7 +24,7 @@
 <meta property="og:description" content="面试题渗透测试的大概流程和思路渗透测试（Penetration Testing）是一种模拟攻击者的安全测试技术。它旨在帮助组织发现和修复存在的安全漏洞，并加强网络的安全性。 一般来说，渗透测试的流程如下：  计划和准备：包括识别测试目标、了解测试目标的基本信息、制定测试计划和测试方案。确定测试的目标和范围，并准备好相关的测试工具。 收集信息：通过各种手段收集目标系统的信息，包括网络拓扑、操作系统版">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-09T16:29:12.000Z">
-<meta property="article:modified_time" content="2022-12-09T16:29:35.733Z">
+<meta property="article:modified_time" content="2022-12-09T17:17:39.818Z">
 <meta property="article:author" content="Wuhahe">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary_large_image">
@@ -197,7 +197,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      4.8k 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23 分钟
+      40 分钟
     </span>
   
 
@@ -352,6 +352,43 @@
 <li>通过指纹信息进行模糊测试，寻找网站未曝光的漏洞，并进行利用。</li>
 <li>通过指纹信息进行攻击模拟，模拟网站遭受攻击的情况，并验证网站的安全防护能力。</li>
 </ol>
+<h2 id="讲一下sql注入的原理吧"><a href="#讲一下sql注入的原理吧" class="headerlink" title="讲一下sql注入的原理吧"></a>讲一下sql注入的原理吧</h2><p>SQL注入攻击是一种恶意的攻击，目的是通过插入恶意的SQL代码来破坏数据库的完整性，或者获取数据库中的敏感信息。</p>
+<p>通常，这种攻击是通过提交表单或者URL参数的形式来实现的，攻击者会在提交的数据中包含恶意的SQL代码，被数据库解释器执行。由于数据库解释器无法区分正常的查询语句和恶意代码，因此会将恶意代码作为查询语句来执行，从而达到破坏数据库或获取敏感信息的目的。</p>
+<p>为了防止这种攻击，应该遵循一些基本的安全措施，例如对用户提交的数据进行严格的过滤和验证，确保其中不包含恶意的SQL代码，并使用参数化查询来代替拼接SQL语句的方式，这样可以有效地防止SQL注入攻击。</p>
+<h2 id="有了解过宽字节注入吗？"><a href="#有了解过宽字节注入吗？" class="headerlink" title="有了解过宽字节注入吗？"></a>有了解过宽字节注入吗？</h2><p>宽字节注入是恶意攻击手段，它利用了程序对宽字节字符串的不当处理，来注入恶意代码。通过插入特殊字符或者字符串，使程序识别出一些额外信息，导致程序发生异常或漏洞，从而获取控制权限或者访问敏感信息。宽字节注入的主要原理是利用程序对于特殊字符的不完全处理，从而达到攻击目的。</p>
+<p>宽字节字符串是指使用多字节字符集编码的字符串，其中每个字符占用多个字节。这种类型的攻击通常发生在使用宽字节字符集的语言（如中文、日文等）中，因为这些语言使用的字符集中的字符通常需要多个字节来表示。</p>
+<h2 id="对于时间盲注你怎样去判断数据库名或者用户名的第一个字母？"><a href="#对于时间盲注你怎样去判断数据库名或者用户名的第一个字母？" class="headerlink" title="对于时间盲注你怎样去判断数据库名或者用户名的第一个字母？"></a>对于时间盲注你怎样去判断数据库名或者用户名的第一个字母？</h2><p>时间盲注参考 – <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_51954912/article/details/116100446">https://blog.csdn.net/qq_51954912/article/details/116100446</a></p>
+<p>通常情况下，对于时间盲注，我们可以通过设置一个特定的条件，让数据库名或者用户名的第一个字母满足这个条件。然后通过观察时间延迟的变化，来判断这个字母是否正确。例如，我们可以设置一个条件，让数据库名或者用户名的第一个字母为字母”a”，然后通过查询语句，观察时间延迟是否发生变化。如果发生变化，则说明这个字母是正确的；如果没有变化，则说明这个字母不正确，需要更换为其他字母进行测试。</p>
+<p>例如，我们可以通过查询语句</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs applescript">?<span class="hljs-built_in">id</span>=<span class="hljs-number">1</span>&#x27; <span class="hljs-keyword">and</span> <span class="hljs-keyword">if</span>(ascii(substr(database(),<span class="hljs-number">1</span>,<span class="hljs-number">1</span>))=<span class="hljs-number">115</span>,sleep(<span class="hljs-number">2</span>),<span class="hljs-number">0</span>) <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
+
+<p>该语句判断数据库名第一个字母的ascii码是否为115，是则延迟2秒回显，不是则直接回显，拼接后sql语句为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> `database` <span class="hljs-keyword">WHERE</span> <span class="hljs-string">&#x27;id=1&#x27;</span> <span class="hljs-keyword">and</span> if(ascii(substr(database(),<span class="hljs-number">1</span>,<span class="hljs-number">1</span>))<span class="hljs-operator">=</span><span class="hljs-number">115</span>,sleep(<span class="hljs-number">2</span>),<span class="hljs-number">0</span>) <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
+
+<p>来比较查询时间的差异，如果查询时间差异明显，则可以判断用户名的第一个字母为”s”（ascii转码后）。然后我们可以通过查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> `database` <span class="hljs-keyword">WHERE</span> <span class="hljs-string">&#x27;id=1&#x27;</span> <span class="hljs-keyword">and</span> if(ascii(substr(database(),<span class="hljs-number">2</span>,<span class="hljs-number">1</span>))<span class="hljs-operator">=</span><span class="hljs-number">101</span>,sleep(<span class="hljs-number">2</span>),<span class="hljs-number">0</span>) <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
+
+<p>来确定用户名的第二个字母，以此类推，即可确定数据库名或用户名的所有字母。</p>
+<h2 id="mysql的udf提权，你有了解过吗？"><a href="#mysql的udf提权，你有了解过吗？" class="headerlink" title="mysql的udf提权，你有了解过吗？"></a>mysql的udf提权，你有了解过吗？</h2><p>MySQL UDF 是一种特殊的 MySQL 函数，它允许用户在自己的代码中定义函数。这对于提高 MySQL 服务器的性能和扩展其功能非常有用。</p>
+<p>由于UDF有提权漏洞，如果恶意用户利用该漏洞，可能导致提权。</p>
+<p>提权的方法为：</p>
+<ol>
+<li>首先，恶意用户需要创建一个可以执行系统命令的UDF函数，可以使用C语言来实现。</li>
+<li>然后，恶意用户需要在MySQL中创建一个新的函数，并将其指向刚才创建的UDF函数。</li>
+<li>最后，恶意用户可以通过执行该函数来获取提权，并执行系统命令。</li>
+</ol>
+<p>为了防止UDF提权漏洞的发生，MySQL提供了一个叫做“secure_file_priv”的系统变量，可以限制UDF函数的存储位置，或者在MySQL中禁用UDF函数,从而避免恶意用户利用UDF提权的情况。</p>
+<h2 id="如果你想利用udf提权，需要确认mysql版本吗？追问，哪个版本之上和之下有什么区别你知道吗？"><a href="#如果你想利用udf提权，需要确认mysql版本吗？追问，哪个版本之上和之下有什么区别你知道吗？" class="headerlink" title="如果你想利用udf提权，需要确认mysql版本吗？追问，哪个版本之上和之下有什么区别你知道吗？"></a>如果你想利用udf提权，需要确认mysql版本吗？追问，哪个版本之上和之下有什么区别你知道吗？</h2><p>是的，如果你想利用 UDF 提权，你需要确认 MySQL 的版本。不同的版本有不同的特性，并且一些功能可能只在特定的版本中可用。因此，确认 MySQL 版本的重要性。</p>
+<p>更重要的是</p>
+<hr>
+<p>MySQL 5.0版本之上开始支持udf，而MySQL 5.7版本之下不支持udf，因此如果目标服务器的mysql版本低于5.7，那么可以考虑使用udf提权。</p>
+<p>在MySQL 5.7版本之上，udf功能被禁用，需要通过特殊方式才能启用udf，这就需要更高的技巧和知识。</p>
+<p>总的来说，udf提权的可行性取决于mysql版本，需要对目标服务器的版本进行确认。</p>
+<hr>
+<p>MYSQL 5.1以上版本，必须要把udf.dll文件放到MYSQL安装目录下的libplugin文件夹下才能创建自定义函数</p>
+<hr>
+<p>因为不同版本的mysql对udf的支持情况不同，在不同版本中利用udf提权的方式也不同。</p>
+<p>通常来说，在mysql 5.1版本之上，udf提权的方式一般是利用mysql的函数提权漏洞，通过在udf中注入代码实现提权。而在mysql 5.1版本之下，udf提权的方式则一般是通过利用mysql的反序列化漏洞实现提权。</p>
 
             </div>
             <hr>
